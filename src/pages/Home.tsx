@@ -1,4 +1,5 @@
-import FirstSection from "@/components/sections/FisrtSection"
+import FirstSection from "@/components/sections/FirstSection"
+
 
 const Home = () => {
   return (
