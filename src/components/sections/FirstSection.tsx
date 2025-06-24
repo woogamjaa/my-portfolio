@@ -11,82 +11,77 @@ const FirstSection = () => {
   const middleTextRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // 0.5초 후에 ScrollTrigger 등록 (페이지 안정화 후)
+    // 0.3초 후에 ScrollTrigger 등록 (페이지 안정화 후)
     const timer = setTimeout(() => {
       const ctx = gsap.context(() => {
         if (!sectionRef.current || !leftTextRef.current || !rightTextRef.current || !middleTextRef.current) {
           return
         }
 
-        console.log('GSAP 초기화 시작 - 지연 후')
+        console.log('GSAP 초기화 시작 - 고정 배경, 화면 밖으로 가려짐')
 
-        // 초기 상태 다시 강제 설정
+        // 초기 상태 설정
         gsap.set(leftTextRef.current, {
-          x: 0,
-          opacity: 1,
-          clearProps: "all"  // 모든 기존 속성 제거
+          x: 0,              // 중앙 위치에서 시작
+          opacity: 1
         })
         
         gsap.set(rightTextRef.current, {
-          x: 0,
-          opacity: 1,
-          clearProps: "all"  // 모든 기존 속성 제거
+          x: 0,              // 중앙 위치에서 시작  
+          opacity: 1
         })
         
+        // FrontEnd는 Welcome To와 MINHYUK PAGE 사이 중앙에 숨겨져 있음
         gsap.set(middleTextRef.current, {
-          opacity: 0,
-          scale: 0,
-          display: 'none',
-          clearProps: "all"  // 모든 기존 속성 제거
+          y: 80,          // 아래쪽에 완전히 숨겨짐
+          opacity: 1,         
+          scale: 0.7,           
+          display: 'block'    
         })
 
-      // ScrollTrigger 타임라인 - 범위 완전 변경!
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'bottom bottom',    // 섹션 하단이 화면 하단에 닿을 때 시작
-          end: 'bottom top',         // 섹션 하단이 화면 상단에 갈 때 끝
-          scrub: 1,
-          markers: true,
-          onUpdate: (self) => {
-            console.log('진행도:', Math.round(self.progress * 100) + '%')
-          },
-          immediateRender: false,    // 즉시 렌더링 방지
-        }
-      })
+        // ScrollTrigger 타임라인 - 배경 고정, 텍스트만 움직임
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',          // 섹션이 화면 최상단에 닿을 때 시작
+            end: '+=300vh',            // 뷰포트 높이만큼 스크롤해야 완료
+            scrub: 3,               
+            pin: true,                 // 배경 고정 (핀 효과)
+            pinSpacing: true,          // 핀 간격 유지
+            markers: false,            
+            onUpdate: (self) => {
+              console.log('진행도:', Math.round(self.progress * 100) + '%')
+            }
+          }
+        })
 
-      // 애니메이션 실행
-      timeline
+        // 애니메이션: 텍스트들이 화면 밖으로 나가며 FrontEnd가 중앙에 나타남
+        timeline
         .to(leftTextRef.current, {
-          x: -400,
+          x: '-5vw',        // 화면 밖이 아닌 적당한 왼쪽 위치에서 멈춤
           duration: 1,
-          ease: 'power2.out'
+          ease: 'none'       
         }, 0)
         .to(rightTextRef.current, {
-          x: 400,
+          x: '12vw',         // 화면 밖이 아닌 적당한 오른쪽 위치에서 멈춤  
           duration: 1,
-          ease: 'power2.out'
+          ease: 'none'       
         }, 0)
-        .set(middleTextRef.current, {
-          display: 'block'
-        }, 0.3)
         .to(middleTextRef.current, {
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: 'back.out(1.7)'
-        }, 0.3)
+          y: '10%',           
+          duration: 0.8,
+          ease: 'none'       
+        }, 0)
+      }, sectionRef)
 
-    }, sectionRef)
-
-    return () => ctx.revert()
-    }, 500) // 0.5초 지연
+      return () => ctx.revert()
+    }, 300)
 
     return () => clearTimeout(timer)
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden px-4">
+    <section ref={sectionRef} className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden">
       {/* 상단 네비게이션 바 */}
       <header className="w-full max-w-7xl p-6 flex justify-between items-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
         <h1 className="text-lg sm:text-xl font-bold tracking-wider">WOOMINHUYK</h1>
@@ -97,37 +92,26 @@ const FirstSection = () => {
         </button>
       </header>
 
-      {/* 메인 텍스트 컨테이너 - 진짜 간단하게! */}
-      <div className="w-full max-w-7xl flex items-center justify-center">
-        {/* 처음에는 정말로 한 줄로 붙어있음 */}
+      {/* 메인 텍스트 컨테이너 - 전체 섹션에 오버플로우 숨김 적용 */}
+      <div className="w-full h-full flex items-center justify-center relative">
+        {/* Welcome To - 스크롤시 화면 왼쪽 밖으로 완전히 사라짐 */}
         <span ref={leftTextRef} className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
-          Welcome To
-        </span>
-        <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mx-2">
-          &nbsp;
-        </span>
-        <span ref={rightTextRef} className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
-          MINHYUK PAGE
-        </span>
+            Welcome To&nbsp;
+        </span> 
         
-        {/* FrontEnd - 진짜로 숨김
-        <div ref={middleTextRef} className="absolute text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light italic text-gray-300 tracking-widest">
-          FrontEnd
-        </div> */}
-      </div>
+        {/* MINHYUK PAGE - 스크롤시 화면 오른쪽 밖으로 완전히 사라짐 */}
+        <span ref={rightTextRef} className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
+            MINHYUK PAGE
+        </span>
 
-      {/* 스크롤 힌트 */}
-      <div className="w-full flex justify-center mt-16">
-        <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white rounded-full flex justify-center animate-bounce">
-          <div className="w-1 h-2 sm:h-3 bg-white rounded-full mt-2 animate-pulse"></div>
-        </div>
-      </div>
-
-      {/* 현재 상태 표시 */}
-      <div className="w-full max-w-7xl p-4 text-xs text-gray-500 mt-8">
-        <div className="text-center">
-          <div>🔥 처음에는 정말로 "Welcome To MINHYUK PAGE" 한 줄!</div>
-          <div>🚀 스크롤하면 좌우로 벌어지며 "FrontEnd" 등장!</div>
+       {/* 오버플로우 숨김 컨테이너 (투명 박스 역할) */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative w-60 h-16 overflow-hidden flex items-center justify-center">
+            {/* FrontEnd - 밑에서 위로 올라오며 마스킹 컨테이너에 의해 가려짐/나타남 */}
+            <div ref={middleTextRef} className="absolute text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
+              FrontEnd
+            </div>
+          </div>
         </div>
       </div>
     </section>
