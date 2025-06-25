@@ -83,41 +83,55 @@ const FirstSection = () => {
   return (
     <section ref={sectionRef} className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden">
       {/* 상단 네비게이션 바 */}
-      <header className="w-full max-w-7xl p-6 flex justify-between items-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
-        <h1 className="text-lg sm:text-xl font-bold tracking-wider">WOOMINHUYK</h1>
+      <header className="w-full max-w-7xl p-4 md:p-6 xl:p-8 flex justify-between items-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
+        <h1 className="text-lg md:text-xl xl:text-2xl font-bold tracking-wider">WOOMINHUYK</h1>
         <button className="flex flex-col space-y-1 group cursor-pointer">
-          <div className="w-5 sm:w-6 h-0.5 bg-white transition-all group-hover:bg-gray-300"></div>
-          <div className="w-5 sm:w-6 h-0.5 bg-white transition-all group-hover:bg-gray-300"></div>
-          <div className="w-5 sm:w-6 h-0.5 bg-white transition-all group-hover:bg-gray-300"></div>
+          <div className="w-5 md:w-6 xl:w-7 h-0.5 xl:h-1 bg-white transition-all group-hover:bg-gray-300"></div>
+          <div className="w-5 md:w-6 xl:w-7 h-0.5 xl:h-1 bg-white transition-all group-hover:bg-gray-300"></div>
+          <div className="w-5 md:w-6 xl:w-7 h-0.5 xl:h-1 bg-white transition-all group-hover:bg-gray-300"></div>
         </button>
       </header>
 
-      {/* 메인 텍스트 컨테이너 - 전체 섹션에 오버플로우 숨김 적용 */}
-      <div className="w-full h-full flex items-center justify-center relative">
-        {/* Welcome To - 스크롤시 화면 왼쪽 밖으로 완전히 사라짐 */}
-        <span ref={leftTextRef} className="text-5xl sm:text-2xl md:text-5xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
-            Welcome To
-        </span> 
+      {/* 메인 텍스트 컨테이너 - Flex 반응형 */}
+      <div className="w-full h-full flex flex-col xl:flex-row items-center justify-center relative gap-4 xl:gap-0">
         
-        {/* MINHYUK PAGE - 스크롤시 화면 오른쪽 밖으로 완전히 사라짐 */}
-        <span ref={rightTextRef} className="ml-5 text-5xl sm:text-2xl md:text-5xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
-            MINHYUK Page
-        </span>
+        {/* Welcome To - 모바일/태블릿: 첫번째 줄, 데스크탑: 왼쪽 */}
+        <span 
+          ref={leftTextRef} 
+          className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-1 xl:order-1"
+        >
+          Welcome To
+        </span> 
 
-       {/* 오버플로우 숨김 컨테이너 (투명 박스 역할) */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative overflow-hidden flex items-center justify-center
-                          w-60 h-18
-                          sm:w-96 sm:h-20 
-                          md:w-[30rem] md:h-20 
-                          lg:w-[36rem] lg:h-20 
-                          xl:w-[44rem] xl:h-30">
-            {/* FrontEnd - 밑에서 위로 올라오며 마스킹 컨테이너에 의해 가려짐/나타남 */}
-            <div ref={middleTextRef} className="absolute text-5xl sm:text-2xl md:text-5xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
+        {/* FrontEnd - 모바일/태블릿: 두번째 줄, 데스크탑: 중앙 (절대위치) */}
+        <div className="order-2 xl:order-2 xl:absolute xl:inset-0 flex items-center justify-center">
+          <div className="relative overflow-hidden flex items-center justify-center"
+               style={{
+                 width: 'fit-content',
+                 height: 'fit-content',
+                 minWidth: 'clamp(150px, 40vw, 500px)',
+                 minHeight: 'clamp(40px, 8vh, 120px)'
+               }}>
+            <div 
+              ref={middleTextRef} 
+              className="absolute xl:relative text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight"
+              style={{
+                fontSize: 'clamp(1.5rem, 6vw, 6rem)'
+              }}
+            >
               FrontEnd
             </div>
           </div>
         </div>
+        
+        {/* MINHYUK Page - 모바일/태블릿: 세번째 줄, 데스크탑: 오른쪽 */}
+        <span 
+          ref={rightTextRef} 
+          className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-3 xl:order-3 xl:ml-5"
+        >
+          MINHYUK Page
+        </span>
+
       </div>
     </section>
   )
