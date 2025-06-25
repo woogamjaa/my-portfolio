@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Header from '../common/Header'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -82,15 +83,8 @@ const FirstSection = () => {
 
   return (
     <section ref={sectionRef} className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden">
-      {/* 상단 네비게이션 바 */}
-      <header className="w-full max-w-7xl p-4 md:p-6 xl:p-8 flex justify-between items-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
-        <h1 className="text-lg md:text-xl xl:text-2xl font-bold tracking-wider">WOOMINHUYK</h1>
-        <button className="flex flex-col space-y-1 group cursor-pointer">
-          <div className="w-5 md:w-6 xl:w-7 h-0.5 xl:h-1 bg-white transition-all group-hover:bg-gray-300"></div>
-          <div className="w-5 md:w-6 xl:w-7 h-0.5 xl:h-1 bg-white transition-all group-hover:bg-gray-300"></div>
-          <div className="w-5 md:w-6 xl:w-7 h-0.5 xl:h-1 bg-white transition-all group-hover:bg-gray-300"></div>
-        </button>
-      </header>
+      {/* 헤더 컴포넌트 */}
+      <Header />
 
       {/* 메인 텍스트 컨테이너 - Flex 반응형 */}
       <div className="w-full h-full flex flex-col xl:flex-row items-center justify-center relative gap-4 xl:gap-0">
@@ -113,6 +107,7 @@ const FirstSection = () => {
         <span ref={rightTextRef} className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-3 xl:order-3 xl:ml-5">
           MINHYUK Page
         </span>
+
       </div>
     </section>
   )
