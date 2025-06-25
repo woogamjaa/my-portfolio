@@ -69,12 +69,12 @@ const SecondSection = () => {
   }
 
   return (
-    <section ref={sectionRef} className="min-h-screen bg-gray-900 text-white py-20 px-4">
+    <section ref={sectionRef} className="min-h-screen bg-white text-black py-20 px-4">
       <div className="max-w-6xl mx-auto">
         {/* 섹션 제목 */}
         <div className="text-center mb-16">
           <h2 ref={titleRef} className="text-4xl md:text-6xl font-bold mb-6">About Me</h2>
-          <p ref={descriptionRef} className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">프론트엔드 개발자로서의 여정과 기술 스택을 소개합니다</p>
+          <p ref={descriptionRef} className="text-xl md:text-2xl text-black max-w-3xl mx-auto">프론트엔드 개발자로서의 여정과 기술 스택을 소개합니다</p>
         </div>
 
         {/* 스킬 카드들 */}
