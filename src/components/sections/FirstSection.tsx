@@ -44,7 +44,7 @@ const FirstSection = () => {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top top',          // 섹션이 화면 최상단에 닿을 때 시작
-            end: '+=300vh',            // 뷰포트 높이만큼 스크롤해야 완료
+            end: '+=450vh',            // 뷰포트 높이만큼 스크롤해야 완료
             scrub: 3,               
             pin: true,                 // 배경 고정 (핀 효과)
             pinSpacing: true,          // 핀 간격 유지
@@ -63,7 +63,7 @@ const FirstSection = () => {
           ease: 'none'       
         }, 0)
         .to(rightTextRef.current, {
-          x: '12vw',         // 화면 밖이 아닌 적당한 오른쪽 위치에서 멈춤  
+          x: '14vw',         // 화면 밖이 아닌 적당한 오른쪽 위치에서 멈춤  
           duration: 1,
           ease: 'none'       
         }, 0)
@@ -95,20 +95,25 @@ const FirstSection = () => {
       {/* 메인 텍스트 컨테이너 - 전체 섹션에 오버플로우 숨김 적용 */}
       <div className="w-full h-full flex items-center justify-center relative">
         {/* Welcome To - 스크롤시 화면 왼쪽 밖으로 완전히 사라짐 */}
-        <span ref={leftTextRef} className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
-            Welcome To&nbsp;
+        <span ref={leftTextRef} className="text-5xl sm:text-2xl md:text-5xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
+            Welcome To
         </span> 
         
         {/* MINHYUK PAGE - 스크롤시 화면 오른쪽 밖으로 완전히 사라짐 */}
-        <span ref={rightTextRef} className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
-            MINHYUK PAGE
+        <span ref={rightTextRef} className="ml-5 text-5xl sm:text-2xl md:text-5xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
+            MINHYUK Page
         </span>
 
        {/* 오버플로우 숨김 컨테이너 (투명 박스 역할) */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative w-60 h-16 overflow-hidden flex items-center justify-center">
+          <div className="relative overflow-hidden flex items-center justify-center
+                          w-60 h-18
+                          sm:w-96 sm:h-20 
+                          md:w-[30rem] md:h-20 
+                          lg:w-[36rem] lg:h-20 
+                          xl:w-[44rem] xl:h-30">
             {/* FrontEnd - 밑에서 위로 올라오며 마스킹 컨테이너에 의해 가려짐/나타남 */}
-            <div ref={middleTextRef} className="absolute text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
+            <div ref={middleTextRef} className="absolute text-5xl sm:text-2xl md:text-5xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
               FrontEnd
             </div>
           </div>
