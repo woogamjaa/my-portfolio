@@ -1,7 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+
+  // 메뉴 열릴 때 스크롤 방지
+  useEffect(() => {
+    if (menuOpen) {
+      // 스크롤 방지
+      document.body.style.overflow = 'hidden'
+    } else {
+      // 스크롤 복원
+      document.body.style.overflow = 'unset'
+    }
+
+    // 컴포넌트 언마운트 시 스크롤 복원
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [menuOpen])
 
   return (
     <>
