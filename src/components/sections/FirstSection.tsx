@@ -96,42 +96,23 @@ const FirstSection = () => {
       <div className="w-full h-full flex flex-col xl:flex-row items-center justify-center relative gap-4 xl:gap-0">
         
         {/* Welcome To - 모바일/태블릿: 첫번째 줄, 데스크탑: 왼쪽 */}
-        <span 
-          ref={leftTextRef} 
-          className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-1 xl:order-1"
-        >
+        <span ref={leftTextRef} className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-1 xl:order-1">
           Welcome To
         </span> 
 
         {/* FrontEnd - 모바일/태블릿: 두번째 줄, 데스크탑: 중앙 (절대위치) */}
         <div className="order-2 xl:order-2 xl:absolute xl:inset-0 flex items-center justify-center">
-          <div className="relative overflow-hidden flex items-center justify-center"
-               style={{
-                 width: 'fit-content',
-                 height: 'fit-content',
-                 minWidth: 'clamp(150px, 40vw, 500px)',
-                 minHeight: 'clamp(40px, 8vh, 120px)'
-               }}>
-            <div 
-              ref={middleTextRef} 
-              className="absolute xl:relative text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight"
-              style={{
-                fontSize: 'clamp(1.5rem, 6vw, 6rem)'
-              }}
-            >
+          <div className="relative overflow-hidden flex items-center justify-center" style={{ width: 'fit-content', height: 'fit-content', minWidth: 'clamp(150px, 40vw, 500px)', minHeight: 'clamp(40px, 8vh, 120px)' }}>
+            <div ref={middleTextRef} className="absolute xl:relative text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight" style={{ fontSize: 'clamp(1.5rem, 6vw, 6rem)' }}>
               FrontEnd
             </div>
           </div>
         </div>
         
         {/* MINHYUK Page - 모바일/태블릿: 세번째 줄, 데스크탑: 오른쪽 */}
-        <span 
-          ref={rightTextRef} 
-          className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-3 xl:order-3 xl:ml-5"
-        >
+        <span ref={rightTextRef} className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-3 xl:order-3 xl:ml-5">
           MINHYUK Page
         </span>
-
       </div>
     </section>
   )
