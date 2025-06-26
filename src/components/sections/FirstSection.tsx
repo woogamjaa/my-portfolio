@@ -44,12 +44,12 @@ const FirstSection = () => {
         const timeline = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top top',          // 섹션이 화면 최상단에 닿을 때 시작
-            end: '+=450vh',            // 뷰포트 높이만큼 스크롤해야 완료
-            scrub: 3,               
+            start: 'center center',          // 섹션이 화면 최상단에 닿을 때 시작
+            end: 'bottom 2%',            // 뷰포트 높이만큼 스크롤해야 완료
+            scrub: 1,               
             pin: true,                 // 배경 고정 (핀 효과)
             pinSpacing: true,          // 핀 간격 유지
-            markers: false,            
+            markers: true,            
             onUpdate: (self) => {
               console.log('진행도:', Math.round(self.progress * 100) + '%')
             }

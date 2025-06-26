@@ -23,16 +23,15 @@ const SecondSection = () => {
       extraPadding = 150  // 모바일에서 스크롤 여유 공간 추가
     }
 
-    const scrollDistance = container.scrollWidth - vw + extraPadding
+    const scrollDistance = container.scrollWidth - vw + extraPadding - 60
 
     gsap.to(container, {
       x: -scrollDistance,
       ease: 'none',
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: 'center center',
-        // end: () => `+=${scrollDistance}`,
-        end: 'bottom 20%',
+        start: 'center top', // 요소가 거의 화면 위에 올라왔을 때 시작하고 싶음
+        end: 'bottom 2%',
         scrub: 1,
         markers: true,
         invalidateOnRefresh: true,
