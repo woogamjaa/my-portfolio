@@ -64,7 +64,7 @@ const FirstSection = () => {
           ease: 'none'       
         }, 0)
         .to(rightTextRef.current, {
-          x: '14vw',         // 화면 밖이 아닌 적당한 오른쪽 위치에서 멈춤  
+          x: '12vw',         // 화면 밖이 아닌 적당한 오른쪽 위치에서 멈춤  
           duration: 1,
           ease: 'none'       
         }, 0)

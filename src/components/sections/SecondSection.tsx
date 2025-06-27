@@ -33,7 +33,7 @@ const SecondSection = () => {
         start: 'center top', // 요소가 거의 화면 위에 올라왔을 때 시작하고 싶음
         end: 'bottom 2%',
         scrub: 1,
-        markers: true,
+        markers: false,
         invalidateOnRefresh: true,
       },
     })
@@ -60,7 +60,6 @@ const SecondSection = () => {
         lg:h-[280vh]         /* lg 이상 */
       "
     >
-      <div className="text-4xl p-6 sm:text-5xl md:text-6xl lg:text-7xl">SKILL</div>
 
       {/* 고정된 카드 영역 */}
       <div className="sticky top-0 h-screen overflow-hidden">
