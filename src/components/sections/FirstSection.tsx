@@ -34,7 +34,7 @@ const FirstSection = () => {
         
         // FrontEnd는 Welcome To와 MINHYUK PAGE 사이 중앙에 숨겨져 있음
         gsap.set(middleTextRef.current, {
-          y: 80,          // 아래쪽에 완전히 숨겨짐
+          y: 150,          // 아래쪽에 완전히 숨겨짐
           opacity: 1,         
           scale: 0.7,           
           display: 'block'    
@@ -49,7 +49,7 @@ const FirstSection = () => {
             scrub: 1,               
             pin: true,                 // 배경 고정 (핀 효과)
             pinSpacing: true,          // 핀 간격 유지
-            markers: true,            
+            markers: false,            
             onUpdate: (self) => {
               console.log('진행도:', Math.round(self.progress * 100) + '%')
             },
@@ -60,7 +60,7 @@ const FirstSection = () => {
         // 애니메이션: 텍스트들이 화면 밖으로 나가며 FrontEnd가 중앙에 나타남
         timeline
         .to(leftTextRef.current, {
-          x: '-5vw',        // 화면 밖이 아닌 적당한 왼쪽 위치에서 멈춤
+          x: '-6vw',        // 화면 밖이 아닌 적당한 왼쪽 위치에서 멈춤
           duration: 1,
           ease: 'none'       
         }, 0)
@@ -70,8 +70,8 @@ const FirstSection = () => {
           ease: 'none'       
         }, 0)
         .to(middleTextRef.current, {
-          y: '10%',           
-          duration: 0.8,
+          y: '5%',           
+          duration: 2,
           ease: 'none'       
         }, 0)
       }, sectionRef)
@@ -83,6 +83,7 @@ const FirstSection = () => {
   }, [])
 
   return (
+    
     <section ref={sectionRef} className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden">
       {/* 헤더 컴포넌트 */}
       <Header />
@@ -109,8 +110,8 @@ const FirstSection = () => {
         {/* Developer - 모바일/태블릿: 두번째 줄, 데스크탑: 중앙 (절대위치) */}
         <div className="order-2 xl:order-2 xl:absolute xl:inset-0 flex items-center justify-center">
           <div className="relative overflow-hidden flex items-center justify-center" style={{ width: 'fit-content', height: 'fit-content', minWidth: 'clamp(150px, 40vw, 500px)', minHeight: 'clamp(40px, 8vh, 120px)' }}>
-            <div ref={middleTextRef} className="absolute xl:relative text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight" style={{ fontSize: 'clamp(2.7rem, 5rem, 6rem)' }}>
-              Developer
+            <div ref={middleTextRef} className="absolute xl:relative text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
+              <img src="/Developer.png" alt="Developer" className=" w-100 pr-5 2xl:w-130 2xl:ml-10 2xl:pr-0 object-cover" />
             </div>
           </div>
         </div>
@@ -119,7 +120,6 @@ const FirstSection = () => {
         <span ref={rightTextRef} className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-3 xl:order-3 xl:ml-5">
           MINHYUK Page
         </span>
-
       </div>
     </section>
   )
