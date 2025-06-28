@@ -4,7 +4,7 @@ const ProfileSection = () => {
 
 
   return (
-    <section className="relative bg-white py-16 px-4 h-screen flex items-center justify-center">
+    <section className="relative bg-[rgba(240,240,240,1)] py-16 px-4 h-screen flex items-center justify-center">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
 
         {/* 프로필 이미지 */}
@@ -14,18 +14,16 @@ const ProfileSection = () => {
         
         {/* 프로필 텍스트 */}
         <div className="flex-1 text-center lg:text-left">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-black font-bold mb-4">
+          <h2 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-black font-bold mb-4">
             안녕하세요!
           </h2>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 mb-6">
-            저는 MINHYUK이고, 프론트엔드 개발자입니다. 열정적으로 웹 기술을 배우고, 더 나은 UI/UX를 고민합니다.
+            민혁 페이지에 오신 것을 환영합니다🙏
           </p>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700">
-            React, TypeScript, Tailwind CSS 등을 활용해 프로젝트를 개발하고 있습니다.
+            이 페이지는 제 포트폴리오로, 개발과 관련된 프로젝트와 기술을 소개하고 있습니다.
           </p>
         </div>
-
-        
       </div>
     </section>
   )

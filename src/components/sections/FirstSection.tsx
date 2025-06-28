@@ -52,7 +52,8 @@ const FirstSection = () => {
             markers: true,            
             onUpdate: (self) => {
               console.log('진행도:', Math.round(self.progress * 100) + '%')
-            }
+            },
+            invalidateOnRefresh: true,
           }
         })
 
@@ -64,7 +65,7 @@ const FirstSection = () => {
           ease: 'none'       
         }, 0)
         .to(rightTextRef.current, {
-          x: '12vw',         // 화면 밖이 아닌 적당한 오른쪽 위치에서 멈춤  
+          x: '15vw',         // 화면 밖이 아닌 적당한 오른쪽 위치에서 멈춤  
           duration: 1,
           ease: 'none'       
         }, 0)
@@ -86,19 +87,30 @@ const FirstSection = () => {
       {/* 헤더 컴포넌트 */}
       <Header />
 
+       {/* ✅ 배경 영상 */}
+      <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-50"
+        >
+          <source src="/star.mp4" type="video/mp4" />
+      </video>
+
       {/* 메인 텍스트 컨테이너 - Flex 반응형 */}
-      <div className="w-full h-full flex flex-col xl:flex-row items-center justify-center relative gap-4 xl:gap-0">
+      <div className="relative z-10 w-full h-full flex flex-col xl:flex-row items-center justify-center relative gap-4 xl:gap-0">
         
         {/* Welcome To - 모바일/태블릿: 첫번째 줄, 데스크탑: 왼쪽 */}
         <span ref={leftTextRef} className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-1 xl:order-1">
           Welcome To
         </span> 
 
-        {/* FrontEnd - 모바일/태블릿: 두번째 줄, 데스크탑: 중앙 (절대위치) */}
+        {/* Developer - 모바일/태블릿: 두번째 줄, 데스크탑: 중앙 (절대위치) */}
         <div className="order-2 xl:order-2 xl:absolute xl:inset-0 flex items-center justify-center">
           <div className="relative overflow-hidden flex items-center justify-center" style={{ width: 'fit-content', height: 'fit-content', minWidth: 'clamp(150px, 40vw, 500px)', minHeight: 'clamp(40px, 8vh, 120px)' }}>
-            <div ref={middleTextRef} className="absolute xl:relative text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight" style={{ fontSize: 'clamp(1.5rem, 6vw, 6rem)' }}>
-              FrontEnd
+            <div ref={middleTextRef} className="absolute xl:relative text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight" style={{ fontSize: 'clamp(2.7rem, 5rem, 6rem)' }}>
+              Developer
             </div>
           </div>
         </div>

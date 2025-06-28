@@ -53,7 +53,8 @@ const SecondSection = () => {
       ref={sectionRef}
       className="
         relative
-        bg-white
+        bg-BLACK
+        
         h-[200vh]            /* 기본 모바일 높이 */
         sm:h-[220vh]         /* sm 이상 */
         md:h-[260vh]         /* md 이상 */
