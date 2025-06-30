@@ -23,7 +23,7 @@ const SecondSection = () => {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: 'center top',
-        end: 'bottom',   // 스크롤 길이 (필요에 맞게 조절)
+        end: 'bottom 30%',   // 스크롤 길이 (필요에 맞게 조절)
         scrub: 1,
         pin: false,
         markers: true
@@ -32,26 +32,26 @@ const SecondSection = () => {
 
     // Frontend
     tl.to(forntlistRef.current, {
-      x: "-100vw",
+      x: "-15vw",
       opacity: 1,
-      duration: 1.5,
-      ease: 'slow(0.7, 0.7, false)'
+      duration: 100,
+      ease: 'slow(1.5, 1.5, false)',
     })
 
     // Backend
     tl.to(backlistRef.current, {
       x: "0vw",
       opacity: 1,
-      duration: 1.5,
-      ease: 'slow(0.7, 0.7, false)'
+      duration: 100,
+      ease: 'slow(1.5, 1.5, false)'
     })
 
     // Environment
     tl.to(enlistRef.current, {
       x: "0vw",
       opacity: 1,
-      duration: 1.5,
-      ease: 'slow(0.7, 0.7, false)'
+      duration: 100,
+      ease: 'slow(1.5, 1.5, false)'
     })
 
   }, [])
