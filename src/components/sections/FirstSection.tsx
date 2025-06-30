@@ -19,8 +19,6 @@ const FirstSection = () => {
           return
         }
 
-        console.log('GSAP 초기화 시작 - 고정 배경, 화면 밖으로 가려짐')
-
         // 초기 상태 설정
         gsap.set(leftTextRef.current, {
           x: 0,              // 중앙 위치에서 시작
@@ -31,8 +29,7 @@ const FirstSection = () => {
           x: 0,              // 중앙 위치에서 시작  
           opacity: 1
         })
-        
-        // FrontEnd는 Welcome To와 MINHYUK PAGE 사이 중앙에 숨겨져 있음
+    
         gsap.set(middleTextRef.current, {
           y: 150,          // 아래쪽에 완전히 숨겨짐
           opacity: 1,         
@@ -50,14 +47,11 @@ const FirstSection = () => {
             pin: true,                 // 배경 고정 (핀 효과)
             pinSpacing: true,          // 핀 간격 유지
             markers: false,            
-            onUpdate: (self) => {
-              console.log('진행도:', Math.round(self.progress * 100) + '%')
-            },
-            invalidateOnRefresh: true,
+            // invalidateOnRefresh: true,
           }
         })
 
-        // 애니메이션: 텍스트들이 화면 밖으로 나가며 FrontEnd가 중앙에 나타남
+        // 애니메이션: 텍스트들이 화면 밖으로 나가며 dev 중앙에 나타남
         timeline
         .to(leftTextRef.current, {
           x: '-6vw',        // 화면 밖이 아닌 적당한 왼쪽 위치에서 멈춤
@@ -65,7 +59,7 @@ const FirstSection = () => {
           ease: 'none'       
         }, 0)
         .to(rightTextRef.current, {
-          x: '15vw',         // 화면 밖이 아닌 적당한 오른쪽 위치에서 멈춤  
+          x: '16vw',         // 화면 밖이 아닌 적당한 오른쪽 위치에서 멈춤  
           duration: 1,
           ease: 'none'       
         }, 0)
