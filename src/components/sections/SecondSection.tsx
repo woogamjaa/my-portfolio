@@ -12,49 +12,57 @@ const SecondSection = () => {
   const enlistRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!sectionRef.current) return
+  if (!sectionRef.current) return;
 
-    // 초기 위치 세팅
-    gsap.set(forntlistRef.current, { x: "100vw", opacity: 0 })
-    gsap.set(backlistRef.current, { x: "200vw", opacity: 0 })
-    gsap.set(enlistRef.current, { x: "300vw", opacity: 0 })
+  gsap.set(forntlistRef.current, { x: "100vw", opacity: 0 });
+  gsap.set(backlistRef.current, { x: "200vw", opacity: 0 });
+  gsap.set(enlistRef.current, { x: "300vw", opacity: 0 });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'center top',
-        end: 'bottom 30%',   // 스크롤 길이 (필요에 맞게 조절)
-        scrub: 1,
-        pin: false,
-        markers: true
-      }
-    })
-
-    // Frontend
-    tl.to(forntlistRef.current, {
-      x: "-15vw",
+  // Frontend
+  ScrollTrigger.create({
+    trigger: forntlistRef.current,
+    start: "center top",
+    end: "bottom 2%",
+    scrub: 1,
+    markers: true,
+    animation: gsap.to(forntlistRef.current, {
+      x: "-18.7vw",
       opacity: 1,
-      duration: 100,
-      ease: 'slow(1.5, 1.5, false)',
-    })
+      duration: 1,
+      ease: "slow(1.5, 1.5, false)",
+    }),
+  });
 
-    // Backend
-    tl.to(backlistRef.current, {
+  // Backend
+  ScrollTrigger.create({
+    trigger: backlistRef.current,
+    start: "center top",
+    end: "bottom 2%",
+    scrub: 1,
+    markers: true,
+    animation: gsap.to(backlistRef.current, {
       x: "0vw",
       opacity: 1,
-      duration: 100,
-      ease: 'slow(1.5, 1.5, false)'
-    })
+      duration: 1,
+      ease: "slow(1.5, 1.5, false)",
+    }),
+  });
 
-    // Environment
-    tl.to(enlistRef.current, {
+  // Environment
+  ScrollTrigger.create({
+    trigger: enlistRef.current,
+    start: "center top",
+    end: "bottom 2%",
+    scrub: 1,
+    markers: true,
+    animation: gsap.to(enlistRef.current, {
       x: "0vw",
       opacity: 1,
-      duration: 100,
-      ease: 'slow(1.5, 1.5, false)'
-    })
-
-  }, [])
+      duration: 1,
+      ease: "slow(1.5, 1.5, false)",
+    }),
+  });
+}, []);
 
   const ExpBar = ({ percent }: { percent: number }) => {
   return (
