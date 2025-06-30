@@ -56,6 +56,22 @@ const SecondSection = () => {
 
   }, [])
 
+  const ExpBar = ({ percent }: { percent: number }) => {
+  return (
+    <svg width="100%" height="15" className="my-3">
+      <rect x="0" y="0" width="100%" height="15" fill="#e5e7eb" rx="10" />
+      <rect
+        x="0"
+        y="0"
+        width={`${percent}%`}
+        height="15"
+        fill="#10b981"
+        rx="10"
+      />
+    </svg>
+  )
+}
+
  return (
    <section ref={sectionRef} className="relative bg-[rgba(240,240,240,1)] py-16 px-4 space-y-12 overflow-hidden">
   
@@ -68,7 +84,14 @@ const SecondSection = () => {
                <img src={card.imgSrc} alt={card.title} className="w-30 h-28" />
              </div>
              <h3 className="text-2xl font-bold mb-3 sm:text-3xl md:text-4xl">{card.title}</h3>
-             <p className="text-black/80 text-sm sm:text-base md:text-lg">{card.description}</p>
+         {typeof card.description === "number" ? (
+           <ExpBar percent={card.description} />
+              ) : (
+                <p className="text-black/80 text-sm sm:text-base md:text-lg">
+                  {card.description}
+                </p>  
+              )}
+              <p className="text-black/80 text-sm sm:text-base md:text-lg">{card.description}</p>
            </div>
          ))}
        </div>
@@ -83,6 +106,13 @@ const SecondSection = () => {
                <img src={card.imgSrc} alt={card.title} className="w-30 h-28" />
              </div>
              <h3 className="text-2xl font-bold mb-3 sm:text-3xl md:text-4xl">{card.title}</h3>
+             {typeof card.description === "number" ? (
+           <ExpBar percent={card.description} />
+              ) : (
+                <p className="text-black/80 text-sm sm:text-base md:text-lg">
+                  {card.description}
+                </p>  
+              )}
              <p className="text-black/80 text-sm sm:text-base md:text-lg">{card.description}</p>
            </div>
          ))}
@@ -98,6 +128,13 @@ const SecondSection = () => {
                <img src={card.imgSrc} alt={card.title} className="w-30 h-28" />
              </div>
              <h3 className="text-2xl font-bold mb-3 sm:text-3xl md:text-4xl">{card.title}</h3>
+             {typeof card.description === "number" ? (
+           <ExpBar percent={card.description} />
+              ) : (
+                <p className="text-black/80 text-sm sm:text-base md:text-lg">
+                  {card.description}
+                </p>  
+              )}
              <p className="text-black/80 text-sm sm:text-base md:text-lg">{card.description}</p>
            </div>
          ))}
