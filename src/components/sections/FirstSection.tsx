@@ -90,6 +90,7 @@ const FirstSection = () => {
           playsInline
           className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-50"
         >
+          <source src="/star.webm" type="video/webm" />
           <source src="/star.mp4" type="video/mp4" />
       </video>
 
