@@ -70,7 +70,7 @@ const ThirdSection = () => {
           {/* 프로젝트 1 */}
           <div ref={setProjectRef(0)} className="flex flex-col lg:flex-row items-center gap-12">
             <div className="lg:w-1/2">
-              <div className="w-140 bg-white h-80 rounded-2xl shadow-xl flex items-center justify-center">
+              <div className="w-120 bg-white h-80 rounded-2xl shadow-xl flex items-center justify-center">
                 <span className="text-6xl">🚀</span>
               </div>
             </div>
@@ -88,7 +88,7 @@ const ThirdSection = () => {
           {/* 프로젝트 2 */}
           <div ref={setProjectRef(1)} className="flex flex-col lg:flex-row-reverse items-center gap-12">
             <div className="lg:w-1/2">
-              <div className="w-140 bg-white h-80 rounded-2xl shadow-xl flex items-center justify-center">
+              <div className="w-120 bg-white h-80 rounded-2xl shadow-xl flex items-center justify-center">
                 <span className="text-6xl">🚀</span>
               </div>
             </div>
@@ -106,7 +106,7 @@ const ThirdSection = () => {
           {/* 프로젝트 3 */}
           <div ref={setProjectRef(2)} className="flex flex-col lg:flex-row items-center gap-12">
             <div className="lg:w-1/2">
-              <div className="w-140 bg-white h-80 rounded-2xl shadow-xl flex items-center justify-center">
+              <div className="w-120 bg-white h-80 rounded-2xl shadow-xl flex items-center justify-center">
                 <span className="text-6xl">🚀</span>
               </div>
             </div>

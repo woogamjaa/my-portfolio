@@ -1,155 +1,117 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { cards } from '../../data/skillsData'
 
-gsap.registerPlugin(ScrollTrigger)
-
 const SecondSection = () => {
-  const sectionRef = useRef<HTMLElement>(null)
   const forntlistRef = useRef<HTMLDivElement>(null)
   const backlistRef = useRef<HTMLDivElement>(null)
   const enlistRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-  if (!sectionRef.current) return;
+    if (!forntlistRef.current || !backlistRef.current || !enlistRef.current) return;
 
-  gsap.set(forntlistRef.current, { x: "100vw", opacity: 0 });
-  gsap.set(backlistRef.current, { x: "200vw", opacity: 0 });
-  gsap.set(enlistRef.current, { x: "300vw", opacity: 0 });
+    // 카드 컨테이너 너비 측정
+    const frontWidth = forntlistRef.current.scrollWidth / 2; // 두 번 복제했으니 2로 나눔
+    const backWidth = backlistRef.current.scrollWidth / 2;
+    const envirWidth = enlistRef.current.scrollWidth / 2;
 
-  // Frontend
-  ScrollTrigger.create({
-    trigger: forntlistRef.current,
-    start: "center top",
-    end: "bottom 2%",
-    scrub: 1,
-    markers: true,
-    animation: gsap.to(forntlistRef.current, {
-      x: "-18.7vw",
-      opacity: 1,
-      duration: 1,
-      ease: "slow(1.5, 1.5, false)",
-    }),
-  });
+    // gsap modifiers 플러그인 로드 (gsap 모듈에 내장됨)
+    // 이걸로 x 값을 모듈로 연산하여 무한 반복 좌표 변환 가능
 
-  // Backend
-  ScrollTrigger.create({
-    trigger: backlistRef.current,
-    start: "center top",
-    end: "bottom 2%",
-    scrub: 1,
-    markers: true,
-    animation: gsap.to(backlistRef.current, {
-      x: "0vw",
-      opacity: 1,
-      duration: 1,
-      ease: "slow(1.5, 1.5, false)",
-    }),
-  });
+    // Frontend (오른쪽 -> 왼쪽)
+    gsap.to(forntlistRef.current, {
+      x: `-=${frontWidth}`, // frontWidth 만큼 왼쪽으로 이동
+      duration: 20,
+      ease: "linear",
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize(x => parseFloat(x) % -frontWidth) // -frontWidth로 모듈러 연산
+      }
+    });
 
-  // Environment
-  ScrollTrigger.create({
-    trigger: enlistRef.current,
-    start: "center top",
-    end: "bottom 2%",
-    scrub: 1,
-    markers: true,
-    animation: gsap.to(enlistRef.current, {
-      x: "0vw",
-      opacity: 1,
-      duration: 1,
-      ease: "slow(1.5, 1.5, false)",
-    }),
-  });
-}, []);
+    // Backend (왼쪽 -> 오른쪽)
+    gsap.to(backlistRef.current, {
+      x: `+=${backWidth}`, // backWidth 만큼 오른쪽으로 이동
+      duration: 20,
+      ease: "linear",
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize(x => parseFloat(x) % backWidth) // backWidth로 모듈러 연산
+      }
+    });
+
+    // Environment (오른쪽 -> 왼쪽)
+    gsap.to(enlistRef.current, {
+      x: `-=${envirWidth}`,
+      duration: 25,
+      ease: "linear",
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize(x => parseFloat(x) % -envirWidth)
+      }
+    });
+  }, []);
+
+  // 카드 필터링 + 2번 복제 렌더링
+  const renderCardsLoop = (category: string) => {
+    const filtered = cards.filter(card => card.category === category);
+    return [...filtered, ...filtered].map((card, i) => (
+      <div
+        key={category + i}
+        className="w-[80vw] sm:w-[45vw] md:w-[18rem] h-[20rem] md:h-[25rem] bg-white rounded-2xl p-6 shadow-xl flex-shrink-0 text-black flex flex-col justify-center items-center"
+      >
+        <div className="text-4xl mb-4 sm:text-5xl md:text-6xl">
+          <img src={card.imgSrc} alt={card.title} className="w-30 h-28" />
+        </div>
+        <h3 className="text-2xl font-bold mb-3 sm:text-3xl md:text-4xl">{card.title}</h3>
+        {typeof card.description === "number" ? (
+          <ExpBar percent={card.description} />
+        ) : (
+          <p className="text-black/80 text-sm sm:text-base md:text-lg">{card.description}</p>
+        )}
+      </div>
+    ));
+  }
 
   const ExpBar = ({ percent }: { percent: number }) => {
+    return (
+      <svg width="100%" height="15" className="my-3">
+        <rect x="0" y="0" width="100%" height="15" fill="#e5e7eb" rx="10" />
+        <rect x="0" y="0" width={`${percent}%`} height="15" fill="#10b981" rx="10" />
+      </svg>
+    )
+  }
+
   return (
-    <svg width="100%" height="15" className="my-3">
-      <rect x="0" y="0" width="100%" height="15" fill="#e5e7eb" rx="10" />
-      <rect
-        x="0"
-        y="0"
-        width={`${percent}%`}
-        height="15"
-        fill="#10b981"
-        rx="10"
-      />
-    </svg>
-  )
-}
+    <section className="relative bg-[rgba(240,240,240,1)] py-16 px-10 space-y-12 overflow-hidden">
+      {/* Frontend */}
+      <div
+        ref={forntlistRef}
+        className="flex gap-4 sm:gap-6 md:gap-8 whitespace-nowrap"
+        style={{ willChange: "transform" }}
+      >
+        {renderCardsLoop('Frontend')}
+      </div>
 
- return (
-   <section ref={sectionRef} className="relative bg-[rgba(240,240,240,1)] py-16 px-10 space-y-12 overflow-hidden">
-  
-     {/* Frontend 섹션 */}
-     <div ref={forntlistRef} className="space-y-4">
-       <div className="flex gap-4 sm:gap-6 md:gap-8">
-         {cards.filter(card => card.category === 'Frontend').map((card, i) => (
-           <div key={i} className="w-[80vw] sm:w-[45vw] md:w-[18rem] h-[20rem] md:h-[25rem] bg-white rounded-2xl p-6 shadow-xl flex-shrink-0 text-black flex flex-col justify-center items-center">
-             <div className="text-4xl mb-4 sm:text-5xl md:text-6xl">
-               <img src={card.imgSrc} alt={card.title} className="w-30 h-28" />
-             </div>
-             <h3 className="text-2xl font-bold mb-3 sm:text-3xl md:text-4xl">{card.title}</h3>
-         {typeof card.description === "number" ? (
-           <ExpBar percent={card.description} />
-              ) : (
-                <p className="text-black/80 text-sm sm:text-base md:text-lg">
-                  {card.description}
-                </p>  
-              )}
-              <p className="text-black/80 text-sm sm:text-base md:text-lg">{card.description}</p>
-           </div>
-         ))}
-       </div>
-     </div>
+      {/* Backend */}
+      <div
+        ref={backlistRef}
+        className="flex gap-4 sm:gap-6 md:gap-8 whitespace-nowrap"
+        style={{ willChange: "transform" }}
+      >
+        {renderCardsLoop('Backend')}
+      </div>
 
-     {/* Backend 섹션 */}
-     <div ref={backlistRef} className="space-y-4">
-       <div className="flex gap-4 sm:gap-6 md:gap-8">
-         {cards.filter(card => card.category === 'Backend').map((card, i) => (
-           <div key={i} className="w-[80vw] sm:w-[45vw] md:w-[18rem] h-[20rem] md:h-[25rem] bg-white rounded-2xl p-6 shadow-xl flex-shrink-0 text-black flex flex-col justify-center items-center">
-             <div className="text-4xl mb-4 sm:text-5xl md:text-6xl">
-               <img src={card.imgSrc} alt={card.title} className="w-30 h-28" />
-             </div>
-             <h3 className="text-2xl font-bold mb-3 sm:text-3xl md:text-4xl">{card.title}</h3>
-             {typeof card.description === "number" ? (
-           <ExpBar percent={card.description} />
-              ) : (
-                <p className="text-black/80 text-sm sm:text-base md:text-lg">
-                  {card.description}
-                </p>  
-              )}
-             <p className="text-black/80 text-sm sm:text-base md:text-lg">{card.description}</p>
-           </div>
-         ))}
-       </div>
-     </div>
+      {/* Environment */}
+      <div
+        ref={enlistRef}
+        className="flex gap-4 sm:gap-6 md:gap-8 whitespace-nowrap"
+        style={{ willChange: "transform" }}
+      >
+        {renderCardsLoop('Environment')}
+      </div>
+    </section>
+  );
+};
 
-     {/* Environment 섹션 */}
-     <div ref={enlistRef} className="space-y-4">
-       <div className="flex gap-4 sm:gap-6 md:gap-8">
-         {cards.filter(card => card.category === 'Environment').map((card, i) => (
-           <div key={i} className="w-[80vw] sm:w-[45vw] md:w-[18rem] h-[20rem] md:h-[25rem] bg-white rounded-2xl p-6 shadow-xl flex-shrink-0 text-black flex flex-col justify-center items-center">
-             <div className="text-4xl mb-4 sm:text-5xl md:text-6xl">
-               <img src={card.imgSrc} alt={card.title} className="w-30 h-28" />
-             </div>
-             <h3 className="text-2xl font-bold mb-3 sm:text-3xl md:text-4xl">{card.title}</h3>
-             {typeof card.description === "number" ? (
-           <ExpBar percent={card.description} />
-              ) : (
-                <p className="text-black/80 text-sm sm:text-base md:text-lg">
-                  {card.description}
-                </p>  
-              )}
-             <p className="text-black/80 text-sm sm:text-base md:text-lg">{card.description}</p>
-           </div>
-         ))}
-       </div>
-     </div>
-   </section>
- )
-}
-
-export default SecondSection
+export default SecondSection;
