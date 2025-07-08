@@ -3,61 +3,72 @@ import gsap from 'gsap'
 import { cards } from '../../data/skillsData'
 
 const SecondSection = () => {
-  const forntlistRef = useRef<HTMLDivElement>(null)
+  const frontlistRef = useRef<HTMLDivElement>(null)
   const backlistRef = useRef<HTMLDivElement>(null)
   const enlistRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!forntlistRef.current || !backlistRef.current || !enlistRef.current) return;
+    if (!frontlistRef.current || !backlistRef.current || !enlistRef.current) return;
 
-    // 카드 컨테이너 너비 측정
-    const frontWidth = forntlistRef.current.scrollWidth / 2; // 두 번 복제했으니 2로 나눔
-    const backWidth = backlistRef.current.scrollWidth / 2;
-    const envirWidth = enlistRef.current.scrollWidth / 2;
+    // 각 카드 리스트의 실제 너비 계산 (복제된 부분 제외)
+    const frontCards = frontlistRef.current.children
+    const backCards = backlistRef.current.children
+    const enCards = enlistRef.current.children
 
-    // gsap modifiers 플러그인 로드 (gsap 모듈에 내장됨)
-    // 이걸로 x 값을 모듈로 연산하여 무한 반복 좌표 변환 가능
+    // 원본 카드들의 너비만 계산 (절반)
+    const frontWidth = Array.from(frontCards).slice(0, frontCards.length / 2).reduce((total, card) => {
+      return total + (card as HTMLElement).offsetWidth + 32 // gap-8 = 32px
+    }, 0)
 
-    // Frontend (오른쪽 -> 왼쪽)
-    gsap.to(forntlistRef.current, {
-      x: `-=${frontWidth}`, // frontWidth 만큼 왼쪽으로 이동
-      duration: 20,
-      ease: "linear",
-      repeat: -1,
-      modifiers: {
-        x: gsap.utils.unitize(x => parseFloat(x) % -frontWidth) // -frontWidth로 모듈러 연산
+    const backWidth = Array.from(backCards).slice(0, backCards.length / 2).reduce((total, card) => {
+      return total + (card as HTMLElement).offsetWidth + 32
+    }, 0)
+
+    const enWidth = Array.from(enCards).slice(0, enCards.length / 2).reduce((total, card) => {
+      return total + (card as HTMLElement).offsetWidth + 32
+    }, 0)
+
+    // Frontend (오른쪽 -> 왼쪽) 
+    gsap.fromTo(frontlistRef.current, 
+      { x: 0 },
+      {
+        x: -frontWidth,
+        duration: 30,
+        ease: "none",
+        repeat: -1,
       }
-    });
+    );
 
     // Backend (왼쪽 -> 오른쪽)
-    gsap.to(backlistRef.current, {
-      x: `+=${backWidth}`, // backWidth 만큼 오른쪽으로 이동
-      duration: 20,
-      ease: "linear",
-      repeat: -1,
-      modifiers: {
-        x: gsap.utils.unitize(x => parseFloat(x) % backWidth) // backWidth로 모듈러 연산
+    gsap.fromTo(backlistRef.current,
+      { x: -backWidth },
+      {
+        x: 0,
+        duration: 25,
+        ease: "none", 
+        repeat: -1,
       }
-    });
+    );
 
     // Environment (오른쪽 -> 왼쪽)
-    gsap.to(enlistRef.current, {
-      x: `-=${envirWidth}`,
-      duration: 25,
-      ease: "linear",
-      repeat: -1,
-      modifiers: {
-        x: gsap.utils.unitize(x => parseFloat(x) % -envirWidth)
+    gsap.fromTo(enlistRef.current,
+      { x: 0 },
+      {
+        x: -enWidth,
+        duration: 35,
+        ease: "none",
+        repeat: -1,
       }
-    });
+    );
   }, []);
 
-  // 카드 필터링 + 2번 복제 렌더링
+  // 카드 필터링 + 3번 복제로 더 부드러운 루프 구현
   const renderCardsLoop = (category: string) => {
     const filtered = cards.filter(card => card.category === category);
-    return [...filtered, ...filtered].map((card, i) => (
+    // 3번 복제해서 더 부드러운 무한 루프 구현
+    return [...filtered, ...filtered, ...filtered].map((card, i) => (
       <div
-        key={category + i}
+        key={`${category}-${i}`}
         className="w-[80vw] sm:w-[45vw] md:w-[18rem] h-[20rem] md:h-[25rem] bg-white rounded-2xl p-6 shadow-xl flex-shrink-0 text-black flex flex-col justify-center items-center"
       >
         <div className="text-4xl mb-4 sm:text-5xl md:text-6xl">
@@ -85,30 +96,36 @@ const SecondSection = () => {
   return (
     <section className="relative bg-[rgba(240,240,240,1)] py-16 px-10 space-y-12 overflow-hidden">
       {/* Frontend */}
-      <div
-        ref={forntlistRef}
-        className="flex gap-4 sm:gap-6 md:gap-8 whitespace-nowrap"
-        style={{ willChange: "transform" }}
-      >
-        {renderCardsLoop('Frontend')}
+      <div className="relative">
+        <div
+          ref={frontlistRef}
+          className="flex gap-8 whitespace-nowrap"
+          style={{ willChange: "transform" }}
+        >
+          {renderCardsLoop('Frontend')}
+        </div>
       </div>
 
       {/* Backend */}
-      <div
-        ref={backlistRef}
-        className="flex gap-4 sm:gap-6 md:gap-8 whitespace-nowrap"
-        style={{ willChange: "transform" }}
-      >
-        {renderCardsLoop('Backend')}
+      <div className="relative">
+        <div
+          ref={backlistRef}
+          className="flex gap-8 whitespace-nowrap"
+          style={{ willChange: "transform" }}
+        >
+          {renderCardsLoop('Backend')}
+        </div>
       </div>
 
       {/* Environment */}
-      <div
-        ref={enlistRef}
-        className="flex gap-4 sm:gap-6 md:gap-8 whitespace-nowrap"
-        style={{ willChange: "transform" }}
-      >
-        {renderCardsLoop('Environment')}
+      <div className="relative">
+        <div
+          ref={enlistRef}
+          className="flex gap-8 whitespace-nowrap"
+          style={{ willChange: "transform" }}
+        >
+          {renderCardsLoop('Environment')}
+        </div>
       </div>
     </section>
   );
