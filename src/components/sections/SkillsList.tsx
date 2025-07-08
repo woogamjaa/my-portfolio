@@ -90,7 +90,7 @@ const SecondSection = () => {
   }
 
   return (
-    <section className="relative bg-[rgba(240,240,240,1)] py-16 px-10 space-y-12 overflow-hidden">
+    <section id="skills" className="relative bg-[rgba(240,240,240,1)] py-16 px-10 space-y-12 overflow-hidden">
       {/* Frontend */}
       <div className="relative">
         <div

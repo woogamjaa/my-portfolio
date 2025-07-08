@@ -84,7 +84,7 @@ const FirstSection = () => {
       </div>
 
       {/* 메인 섹션 */}
-      <section ref={sectionRef} className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden">
+      <section id="maintitle" ref={sectionRef} className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden">
         {/* 배경 영상 */}
         <video
           autoPlay

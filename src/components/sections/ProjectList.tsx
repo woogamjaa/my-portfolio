@@ -58,7 +58,7 @@ const ThirdSection = () => {
   }
 
   return (
-    <section ref={sectionRef} className="min-h-screen bg-[rgba(240,240,240,1)] text-white py-20 px-4">
+    <section id="projects" ref={sectionRef} className="min-h-screen bg-[rgba(240,240,240,1)] text-white py-20 px-4">
       <div className="max-w-6xl mx-auto">
         {/* 섹션 제목 */}
         <div className="text-center mb-20">

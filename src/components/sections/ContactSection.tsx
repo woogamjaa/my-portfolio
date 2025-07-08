@@ -67,7 +67,7 @@ const FourthSection = () => {
   }
 
   return (
-    <section ref={sectionRef} className="min-h-screen bg-purple-900 text-white py-20 px-4">
+    <section id="contact" ref={sectionRef} className="min-h-screen  bg-[rgba(240,240,240,1)] text-white py-20 px-4">
       <div className="max-w-4xl mx-auto">
         {/* 섹션 제목 */}
         <div className="text-center mb-16">

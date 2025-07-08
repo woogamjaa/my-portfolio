@@ -4,7 +4,7 @@ export default function ProfileSection() {
   const [isRealProfile, setIsRealProfile] = useState(false);
 
   return (
-    <section className="relative bg-[rgba(240,240,240,1)] py-16 px-4 h-screen flex items-center justify-center">
+    <section id="profile" className="relative bg-[rgba(240,240,240,1)] py-16 px-4 h-screen flex items-center justify-center">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
         
         {/* 보여줄 이미지 + 텍스트 그룹 */}
