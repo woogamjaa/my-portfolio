@@ -76,14 +76,17 @@ const FirstSection = () => {
     return () => clearTimeout(timer)
   }, [])
 
-  return (
-    
-    <section ref={sectionRef} className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden">
-      {/* 헤더 컴포넌트 */}
-      <Header />
+    return (
+    <>
+      {/* 상단 고정 헤더 - 섹션 밖에 위치 */}
+      <div className="fixed top-0 left-0 w-full z-[100]">
+        <Header />
+      </div>
 
-       {/* ✅ 배경 영상 */}
-      <video
+      {/* 메인 섹션 */}
+      <section ref={sectionRef} className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden">
+        {/* 배경 영상 */}
+        <video
           autoPlay
           muted
           loop
@@ -92,31 +95,32 @@ const FirstSection = () => {
         >
           <source src="/star.webm" type="video/webm" />
           <source src="/star.mp4" type="video/mp4" />
-      </video>
+        </video>
 
-      {/* 메인 텍스트 컨테이너 - Flex 반응형 */}
-      <div className="relative z-10 w-full h-full flex flex-col xl:flex-row items-center justify-center relative gap-4 xl:gap-0">
-        
-        {/* Welcome To - 모바일/태블릿: 첫번째 줄, 데스크탑: 왼쪽 */}
-        <span ref={leftTextRef} className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-1 xl:order-1">
-          Welcome To
-        </span> 
+        {/* 메인 텍스트 컨테이너 - Flex 반응형 */}
+        <div className="relative z-10 w-full h-full flex flex-col xl:flex-row items-center justify-center relative gap-4 xl:gap-0">
+          
+          {/* Welcome To - 모바일/태블릿: 첫번째 줄, 데스크탑: 왼쪽 */}
+          <span ref={leftTextRef} className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-1 xl:order-1">
+            Welcome To
+          </span> 
 
-        {/* Developer - 모바일/태블릿: 두번째 줄, 데스크탑: 중앙 (절대위치) */}
-        <div className="order-2 xl:order-2 xl:absolute xl:inset-0 flex items-center justify-center">
-          <div className="relative overflow-hidden flex items-center justify-center" style={{ width: 'fit-content', height: 'fit-content', minWidth: 'clamp(150px, 40vw, 500px)', minHeight: 'clamp(40px, 8vh, 120px)' }}>
-            <div ref={middleTextRef} className="absolute xl:relative text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
-              <img src="/Developer.png" alt="Developer" className=" w-100 pr-5 2xl:w-130 2xl:ml-10 2xl:pr-0 object-cover" />
+          {/* Developer - 모바일/태블릿: 두번째 줄, 데스크탑: 중앙 (절대위치) */}
+          <div className="order-2 xl:order-2 xl:absolute xl:inset-0 flex items-center justify-center">
+            <div className="relative overflow-hidden flex items-center justify-center" style={{ width: 'fit-content', height: 'fit-content', minWidth: 'clamp(150px, 40vw, 500px)', minHeight: 'clamp(40px, 8vh, 120px)' }}>
+              <div ref={middleTextRef} className="absolute xl:relative text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight">
+                <img src="/Developer.png" alt="Developer" className=" w-100 pr-5 2xl:w-130 2xl:ml-10 2xl:pr-0 object-cover" />
+              </div>
             </div>
           </div>
+          
+          {/* MINHYUK Page - 모바일/태블릿: 세번째 줄, 데스크탑: 오른쪽 */}
+          <span ref={rightTextRef} className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-3 xl:order-3 xl:ml-5">
+            MINHYUK Page
+          </span>
         </div>
-        
-        {/* MINHYUK Page - 모바일/태블릿: 세번째 줄, 데스크탑: 오른쪽 */}
-        <span ref={rightTextRef} className="text-3xl md:text-5xl xl:text-8xl font-bold whitespace-nowrap tracking-tight order-3 xl:order-3 xl:ml-5">
-          MINHYUK Page
-        </span>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 
