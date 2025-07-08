@@ -13,7 +13,7 @@ export default function ProfileSection() {
             {/* 프로필 이미지 */}
             <div className="flex-1 flex justify-center">
               <img
-                src="/public/woogamjaa.png"
+                src="/woogamjaa.png"
                 alt="Profile"
                 className="cursor-pointer w-40 h-40 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-96 lg:h-96 object-cover shadow-lg"
                 onClick={() => setIsRealProfile(true)}
@@ -38,7 +38,7 @@ export default function ProfileSection() {
             {/* 호버시 프로필 실사 이미지 */}
             <div className="flex-1 flex justify-center">
               <img
-                src="/public/존잘러.jpg"
+                src="/존잘러.jpg"
                 alt="Profile Real"
                 className="cursor-pointer w-40 h-40 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-96 lg:h-96 object-cover shadow-lg"
                 onClick={() => setIsRealProfile(false)}
