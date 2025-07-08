@@ -81,7 +81,7 @@ const SecondSection = () => {
 }
 
  return (
-   <section ref={sectionRef} className="relative bg-[rgba(240,240,240,1)] py-16 px-4 space-y-12 overflow-hidden">
+   <section ref={sectionRef} className="relative bg-[rgba(240,240,240,1)] py-16 px-10 space-y-12 overflow-hidden">
   
      {/* Frontend 섹션 */}
      <div ref={forntlistRef} className="space-y-4">
