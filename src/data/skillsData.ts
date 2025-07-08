@@ -53,7 +53,7 @@ export const cards: CardData[] = [
   {
     title: 'spring boot',
     description: 20,
-    imgSrc: '/public/spring-booticon.png',
+    imgSrc: '/spring-booticon.png',
     category: 'Backend',
   },
   {
