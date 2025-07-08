@@ -35,7 +35,7 @@ export const cards: CardData[] = [
   {
     title: 'TypeScript',
     description: 20,
-    imgSrc: '/TypeScripticon.png',
+    imgSrc: '/TypeScripticon1.png',
     category: 'Frontend',
   },
   {
