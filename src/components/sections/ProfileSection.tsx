@@ -48,10 +48,10 @@ export default function ProfileSection() {
             {/* 호버시 프로필 변환 될 텍스트 */}
             <div className="flex-1 text-center lg:text-left">
               <h2 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-black font-bold mb-4">
-                실제 모습입니다 ! ㅎㅎ
+                데헷 !
               </h2>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 mb-6">
-                발표하는 제 모습 멋있지 않나요 😊
+                제 모습입니다 😎
               </p>
             </div>
           </>
