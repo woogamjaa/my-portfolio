@@ -1,16 +1,16 @@
-import FirstSection from "@/components/sections/FirstSection"
-import SecondSection from "@/components/sections/SecondSection"
-import ThirdSection from "@/components/sections/ThirdSection"
+import MainTitle from "@/components/sections/MainTitle"
+import SkillsList from "@/components/sections/SkillsList"
+import ProjectList from "@/components/sections/ProjectList"
 import FourthSection from "@/components/sections/FourthSection"
 import ProfileSection from "@/components/sections/ProfileSection"
 
 const Home = () => {
   return (
     <div className="bg-black text-white">
-      <FirstSection />
+      <MainTitle />
       <ProfileSection />
-      <SecondSection />
-      <ThirdSection />
+      <SkillsList />
+      <ProjectList />
       <FourthSection />
     </div>
   )
