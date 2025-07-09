@@ -61,13 +61,14 @@ const Header = () => {
         <button 
           ref={iconRef}
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ color: '#ffffff' }}
+          className="relative z-[60] p-2"
+          style={{ color: menuOpen ? '#ffffff' : undefined }}
         >
           <svg width="28" height="28" className="md:w-8 md:h-8 xl:w-9 xl:h-9">
             {!menuOpen ? (
               <path fill="currentColor" d="M3 18v-2h18v2H3zm0-5v-2h18v2H3zm0-5V6h18v2H3z" />
             ) : (
-              <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              <path fill="#ffffff" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
             )}
           </svg>
         </button>
