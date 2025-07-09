@@ -23,8 +23,8 @@ const Header = () => {
       // maintitle 섹션에서만 흰색, 나머지는 검은색
       ScrollTrigger.create({
         trigger: '#maintitle',
-        start: 'top top',
-        end: 'bottom top',
+        start: 'top bottom',    // 섹션이 화면에 나타나기 시작할 때
+        end: 'bottom top',      // 섹션이 화면에서 완전히 사라질 때
         onEnter: () => {
           gsap.to([logoRef.current, iconRef.current], { color: '#ffffff', duration: 0.3 })
         },
@@ -36,7 +36,8 @@ const Header = () => {
         },
         onLeaveBack: () => {
           gsap.to([logoRef.current, iconRef.current], { color: '#000000', duration: 0.3 })
-        }
+        },
+        // markers: true // 디버깅용 - 테스트 후 제거
       })
 
       // 초기 색상 설정 (첫 화면 = maintitle = 흰색)
