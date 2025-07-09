@@ -6,7 +6,6 @@ gsap.registerPlugin(ScrollTrigger)
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false)
-  const headerRef = useRef<HTMLElement>(null)
   const logoRef = useRef<HTMLHeadingElement>(null)
   const iconRef = useRef<HTMLButtonElement>(null)
 
@@ -16,66 +15,33 @@ const Header = () => {
     return () => { document.body.style.overflow = 'unset' }
   }, [menuOpen])
 
-  // GSAP ScrollTrigger 설정
+  // 간단한 스크롤 기반 색상 변경
   useEffect(() => {
-    if (!headerRef.current || !logoRef.current || !iconRef.current) return
+    if (!logoRef.current || !iconRef.current) return
 
     const ctx = gsap.context(() => {
-      // 어두운 섹션용 (흰색 글씨)
-      const toDark = () => {
-        gsap.to([logoRef.current, iconRef.current], { color: '#ffffff', duration: 0.3 })
-      }
-
-      // 밝은 섹션용 (검은색 글씨)
-      const toLight = () => {
-        gsap.to([logoRef.current, iconRef.current], { color: '#000000', duration: 0.3 })
-      }
-
-      // 각 섹션별 ScrollTrigger 생성 (적절한 타이밍으로 조정)
+      // maintitle 섹션에서만 흰색, 나머지는 검은색
       ScrollTrigger.create({
         trigger: '#maintitle',
         start: 'top top',
-        end: 'bottom 10%',      // 좀 더 길게 유지
-        onEnter: toDark,
-        onEnterBack: toDark,
-        markers: true, 
+        end: 'bottom top',
+        onEnter: () => {
+          gsap.to([logoRef.current, iconRef.current], { color: '#ffffff', duration: 0.3 })
+        },
+        onLeave: () => {
+          gsap.to([logoRef.current, iconRef.current], { color: '#000000', duration: 0.3 })
+        },
+        onEnterBack: () => {
+          gsap.to([logoRef.current, iconRef.current], { color: '#ffffff', duration: 0.3 })
+        },
+        onLeaveBack: () => {
+          gsap.to([logoRef.current, iconRef.current], { color: '#000000', duration: 0.3 })
+        }
       })
 
-      ScrollTrigger.create({
-        trigger: '#profile',
-        start: 'top 80%',       // 섹션이 화면 80% 지점에 올 때 (더 빨리)
-        end: 'bottom 10%',
-        onEnter: toLight,
-        onEnterBack: toLight
-      })
-
-      ScrollTrigger.create({
-        trigger: '#skills',
-        start: 'top 80%',
-        end: 'bottom 10%', 
-        onEnter: toLight,
-        onEnterBack: toLight
-      })
-
-      ScrollTrigger.create({
-        trigger: '#projects',
-        start: 'top 80%',
-        end: 'bottom 10%',
-        onEnter: toLight,
-        onEnterBack: toLight
-      })
-
-      ScrollTrigger.create({
-        trigger: '#contact',
-        start: 'top 80%',
-        end: 'bottom 10%',
-        onEnter: toLight,
-        onEnterBack: toLight
-      })
-
-      // 초기 테마 설정
-      toDark()
-    }, headerRef)
+      // 초기 색상 설정 (첫 화면 = maintitle = 흰색)
+      gsap.set([logoRef.current, iconRef.current], { color: '#ffffff' })
+    })
 
     return () => ctx.revert()
   }, [])
@@ -83,10 +49,7 @@ const Header = () => {
   return (
     <>
       {/* 상단 네비게이션 바 */}
-      <header 
-        ref={headerRef}
-        className="w-full max-w-7xl p-4 md:p-6 xl:p-8 flex justify-between items-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50"
-      >
+      <header className="w-full max-w-7xl p-4 md:p-6 xl:p-8 flex justify-between items-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
         <h1 
           ref={logoRef}
           className="text-lg md:text-xl xl:text-2xl font-bold tracking-wider"
